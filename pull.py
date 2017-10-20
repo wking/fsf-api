@@ -18,11 +18,11 @@ except ImportError:
 URI = 'https://www.gnu.org/licenses/license-list.html'
 
 TAGS = {
-    'blue': 'viewpoint',
-    'green': 'glp-compatible',
-    'orange': 'libre',
-    'purple': 'fdl-compatible',
-    'red': 'non-free',
+    'blue': {'viewpoint'},
+    'green': {'glp-compatible', 'libre'},
+    'orange': {'libre'},
+    'purple': {'fdl-compatible', 'libre'},
+    'red': {'non-free'},
 }
 
 SPLITS = {
@@ -119,7 +119,7 @@ def extract(root, base_uri=None):
     licenses = {}
     for dl in root.iter(tag='{http://www.w3.org/1999/xhtml}dl'):
         try:
-            tag = TAGS[dl.attrib.get('class')]
+            tags = TAGS[dl.attrib.get('class')]
         except KeyError:
             raise ValueError(
                 'unrecognized class {!r}'.format(dl.attrib.get('class')))
@@ -129,7 +129,7 @@ def extract(root, base_uri=None):
             oid = a.attrib['id']
             for id in SPLITS.get(oid, [oid]):
                 license = {
-                    'tags': [tag],
+                    'tags': tags.copy(),
                 }
                 if a.text and a.text.strip():
                     license['name'] = a.text.strip()
@@ -146,8 +146,7 @@ def extract(root, base_uri=None):
                 if id not in licenses:
                     licenses[id] = license
                 else:
-                    licenses[id]['tags'].append(tag)
-                    licenses[id]['tags'].sort()
+                    licenses[id]['tags'].update(tags)
     return licenses
 
 
@@ -164,6 +163,9 @@ def save(licenses, dir=os.curdir):
         json.dump(obj=index, fp=f, indent=2, sort_keys=True)
         f.write('\n')
     for id, license in licenses.items():
+        license = license.copy()
+        if 'tags' in license:
+            license['tags'] = sorted(license['tags'])
         with open(os.path.join(dir, '{}.json'.format(id)), 'w') as f:
             json.dump(obj=license, fp=f, indent=2, sort_keys=True)
             f.write('\n')
