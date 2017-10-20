@@ -6,6 +6,7 @@ import glob
 import json
 import os
 import sys
+import urllib.parse
 import urllib.request
 
 try:
@@ -13,6 +14,8 @@ try:
 except ImportError:
     import xml.etree.ElementTree as etree
 
+
+URI = 'https://www.gnu.org/licenses/license-list.html'
 
 TAGS = {
     'blue': 'viewpoint',
@@ -106,13 +109,13 @@ IDENTIFIERS = {
 }
 
 
-def get(uri='https://www.gnu.org/licenses/license-list.html'):
+def get(uri):
     parser = etree.XMLParser(ns_clean=True, resolve_entities=False)
     with urllib.request.urlopen(uri) as response:
         return etree.parse(response, base_url=uri, parser=parser)
 
 
-def extract(root):
+def extract(root, base_uri=None):
     licenses = {}
     for dl in root.iter(tag='{http://www.w3.org/1999/xhtml}dl'):
         try:
@@ -134,6 +137,8 @@ def extract(root):
                     continue
                 uri = a.attrib.get('href')
                 if uri:
+                    if base_uri:
+                        uri = urllib.parse.urljoin(base=base_uri, url=uri)
                     license['uri'] = uri
                 identifiers = IDENTIFIERS.get(id)
                 if identifiers:
@@ -168,7 +173,7 @@ if __name__ == '__main__':
     dir = os.curdir
     if len(sys.argv) > 1:
         dir = sys.argv[1]
-    tree = get()
+    tree = get(uri=URI)
     root = tree.getroot()
-    licenses = extract(root=root)
+    licenses = extract(root=root, base_uri=URI)
     save(licenses=licenses, dir=dir)
