@@ -133,7 +133,7 @@ IDENTIFIERS = {
     'FDL1.1': {'spdx': 'GFDL-1.1'},
     'FDL1.2': {'spdx': 'GFDL-1.2'},
     'FDL1.3': {'spdx': 'GFDL-1.3'},
-    'FreeBSD': {'spdx': 'BSD-2-Clause'},
+    'FreeBSD': {'spdx': 'BSD-2-Clause-FreeBSD'},
     'freetype': {'spdx': 'FTL'},
     'GNUAllPermissive': {'spdx': 'FSFAP'},
     'GNUGPLv3': {'spdx': 'GPL-3.0'},
