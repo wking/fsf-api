@@ -176,7 +176,7 @@ IDENTIFIERS = {
     'NCSA': {'spdx':'NCSA'},
     'newOpenLDAP': {'spdx': 'OLDAP-2.7'},
     'Nokia': {'spdx': 'Nokia'},
-    'NoLicense': {'spdx': 'UNSPECIFIED'},
+    'NoLicense': {'spdx': 'NONE'},
     'NOSL': {'spdx': 'NOSL'},
     'NPL-1.0': {'spdx': 'NPL-1.0'},
     'NPL-1.1': {'spdx': 'NPL-1.1'},
