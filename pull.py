@@ -159,7 +159,7 @@ IDENTIFIERS = {
     'Condor': {'spdx': 'Condor-1.1'},
     'ECL2.0': {'spdx': 'ECL-2.0'},
     'eCos11': {'spdx': 'RHeCos-1.1'},
-    'eCos2.0': {'spdx': 'eCos-2.0'},
+    'eCos2.0': {'spdx': 'GPL-2.0+ WITH eCos-exception-2.0'},
     'EPL': {'spdx': 'EPL-1.0'},
     'EPL2': {'spdx': 'EPL-2.0'}, # not in license-list-XML yet
     'EUDataGrid': {'spdx': 'EUDatagrid'},
