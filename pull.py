@@ -99,9 +99,9 @@ IDENTIFIERS = {
     'EUPL': {'spdx': 'EUPL-1.1'},
     'Eiffel': {'spdx': 'EFL-2.0'},
     'Expat': {'spdx': 'MIT'},
-    'FDL1.1': {'spdx': 'GFDL-1.1'},
-    'FDL1.2': {'spdx': 'GFDL-1.2'},
-    'FDL1.3': {'spdx': 'GFDL-1.3'},
+    'FDLv1.1': {'spdx': 'GFDL-1.1'},
+    'FDLv1.2': {'spdx': 'GFDL-1.2'},
+    'FDLv1.3': {'spdx': 'GFDL-1.3'},
     'FreeBSD': {'spdx': 'BSD-2-Clause-FreeBSD'},
     'GNUAllPermissive': {'spdx': 'FSFAP'},
     'GNUGPLv3': {'spdx': 'GPL-3.0'},
@@ -178,4 +178,9 @@ if __name__ == '__main__':
     tree = get(uri=URI)
     root = tree.getroot()
     licenses = extract(root=root, base_uri=URI)
+    unused_identifiers = {
+        key for key in IDENTIFIERS.keys() if key not in licenses}
+    if unused_identifiers:
+        raise ValueError('unused IDENTIFIERS keys: {}'.format(
+            ', '.join(sorted(unused_identifiers))))
     save(licenses=licenses, dir=dir)
