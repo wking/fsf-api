@@ -71,7 +71,15 @@ SPLITS = {
         'FDLv1.2',
         'FDLv1.3',
     ],
+    'FreeArt': [ # any version
+        'LAL-1.2',
+        'LAL-1.3',
+    ],
     'FreeBSDDL': ['FreeBSD'],  # unify (multi-tag)
+    'NPL': [ #any version
+        'NPL-1.0',
+        'NPL-1.1',
+    ],
     # FIXME: still working through this
 }
 
@@ -121,9 +129,13 @@ IDENTIFIERS = {
     'CeCILL-B': {'spdx': 'CECILL-B'},
     'CeCILL-C': {'spdx': 'CECILL-C'},
     'ClarifiedArtistic': {'spdx': 'ClArtistic'},
+    'clearbsd': {'spdx': 'BSD-3-Clause-Clear'},
     'CommonPublicLicense10': {'spdx': 'CPL-1.0'},
+    'cpol': {'spdx': 'CPOL-1.02'},
     'Condor': {'spdx': 'Condor-1.1'},
     'ECL2.0': {'spdx': 'ECL-2.0'},
+    'eCos11': {'spdx': 'RHeCos-1.1'},
+    'eCos2.0': {'spdx': 'eCos-2.0'},
     'EPL': {'spdx': 'EPL-1.0'},
     'EPL2': {'spdx': 'EPL-2.0'}, # not in license-list-XML yet
     'EUDataGrid': {'spdx': 'EUDatagrid'},
@@ -137,17 +149,37 @@ IDENTIFIERS = {
     'freetype': {'spdx': 'FTL'},
     'GNUAllPermissive': {'spdx': 'FSFAP'},
     'GNUGPLv3': {'spdx': 'GPL-3.0'},
+    'gnuplot': {'spdx': 'gnuplot'},
     'GPLv2': {'spdx': 'GPL-2.0'},
     'HPND': {'spdx': 'HPND'},
+    'IBMPL': {'spdx': 'IPL-1.0'},
     'iMatix': {'spdx': 'iMatix'},
+    'imlib': {'spdx': 'Imlib2'},
     'ijg': {'spdx': 'IJG'},
     'intel': {'spdx': 'Intel'},
+    'IPAFONT': {'spdx': 'IPA'},
     'ISC': {'spdx': 'ISC'},
+    'JSON': {'spdx': 'JSON'},
+    'LAL-1.2': {'spdx':'LAL-1.2'},
+    'LAL-1.3': {'spdx':'LAL-1.3'},
     'LGPLv3': {'spdx': 'LGPL-3.0'},
     'LGPLv2.1': {'spdx': 'LGPL-2.1'},
+    'LPPL-1.2': {'spdx': 'LPPL-1.2'},
+    'LPPL-1.3a': {'spdx': 'LPPL-1.3a'},
+    'lucent102': {'spdx': 'LPL-1.02'},
     'ModifiedBSD': {'spdx': 'BSD-3-Clause'},
+    'MPL': {'spdx': 'MPL-1.1'},
     'MPL-2.0': {'spdx':'MPL-2.0'},
+    'ms-pl': {'spdx': 'MPL-1.1'},
+    'ms-rl': {'spdx': 'MS-RL'},
+    'NASA': {'spdx': 'NASA-1.3'},
     'NCSA': {'spdx':'NCSA'},
+    'newOpenLDAP': {'spdx': 'OLDAP-2.7'},
+    'Nokia': {'spdx': 'Nokia'},
+    'NoLicense': {'spdx': 'UNSPECIFIED'},
+    'NOSL': {'spdx': 'NOSL'},
+    'NPL-1.0': {'spdx': 'NPL-1.0'},
+    'NPL-1.1': {'spdx': 'NPL-1.1'},
 
     # FIXME: still working through this
 }
