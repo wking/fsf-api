@@ -170,7 +170,7 @@ IDENTIFIERS = {
     'ModifiedBSD': {'spdx': 'BSD-3-Clause'},
     'MPL': {'spdx': 'MPL-1.1'},
     'MPL-2.0': {'spdx':'MPL-2.0'},
-    'ms-pl': {'spdx': 'MPL-1.1'},
+    'ms-pl': {'spdx': 'MS-PL'},
     'ms-rl': {'spdx': 'MS-RL'},
     'NASA': {'spdx': 'NASA-1.3'},
     'NCSA': {'spdx':'NCSA'},
