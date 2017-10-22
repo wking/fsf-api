@@ -220,7 +220,6 @@ IDENTIFIERS = {
     'RPL-1.1': {'spdx': 'RPL-1.1'},
     'RPL-1.5': {'spdx': 'RPL-1.5'},
     'RPSL': {'spdx': 'RPSL-1.0'},
-    'Ruby': {'spdx': 'Ruby'}, # Note that the text linked is 'not an exact match to the SPDX license list
     'SGIFreeB': {'spdx': 'SGI-B-2.0'},
     'SILOFL': {'spdx': 'OFL-1.1'},
     'SISSL': {'spdx': 'SISSL'}, # Note that the header on the 'FSF website states version 1.0, but the link points to 'version 1.1.  The SPDX license is version 1.1
@@ -243,7 +242,6 @@ IDENTIFIERS = {
     'Zend': {'spdx': 'Zend-2.0'},
     'Zimbra': {'spdx': 'Zimbra-1.3'},
     'ZLib': {'spdx': 'Zlib'},
-    'Zope': {'spdx': 'ZPL-1.1'}, # Note the FSF refers to version 1.0 and SPDX uses version 1.1 - it should be verified that 1.1 should be included
     'ZPL-2.0': {'spdx': 'ZPL-2.0'},
     'ZPL-2.1': {'spdx': 'ZPL-2.1'},
 
