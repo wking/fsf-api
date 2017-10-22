@@ -80,7 +80,31 @@ SPLITS = {
         'NPL-1.0',
         'NPL-1.1',
     ],
-    # FIXME: still working through this
+    'OSL': [ # any version through 3.0
+        'OSL-1.0',
+        'OSL-1.1',
+        'OSL-2.0',
+        'OSL-2.1',
+        'OSL-3.0',
+    ],
+    'RPL': [ # any version - Note that FSF website does not state any version, but references version 1.3 in the URL.  It is assumed that it also covers version 1.1 and 1.5, but this should be verified with FSF.
+        'RPL-1.1',
+        'RPL-1.3',
+        'RPL-1.5',
+    ],
+    'Unicode': [ # any version
+        'Unicode-DFS-2015',
+        'Unicode-DFS-2016',
+    ],
+    'W3C': [ # any version
+        'W3C',
+        'W3C-20150513',
+        'W3C-19980720',
+    ],
+    'Zope2.0': [ # Versions 2.0 and later
+        'ZPL-2.0',
+        'ZPL-2.1',
+    ],
 }
 
 IDENTIFIERS = {
@@ -180,6 +204,48 @@ IDENTIFIERS = {
     'NOSL': {'spdx': 'NOSL'},
     'NPL-1.0': {'spdx': 'NPL-1.0'},
     'NPL-1.1': {'spdx': 'NPL-1.1'},
+    'ODbl': {'spdx': 'ODbL-1.0'},
+    'oldOpenLDAP': {'spdx': 'OLDAP-2.7'},
+    'OpenPublicL': {'spdx': 'OPL-1.0'},
+    'OpenSSL': {'spdx': 'OpenSSL'},
+    'OriginalBSD': {'spdx': 'BSD-4-Clause'},
+    'OSL-1.0': {'spdx': 'OSL-1.0'},
+    'OSL-1.1': {'spdx': 'OSL-1.1'},
+    'OSL-2.0': {'spdx': 'OSL-2.0'},
+    'OSL-2.1': {'spdx': 'OSL-2.1'},
+    'OSL-3.0': {'spdx': 'OSL-3.0'},
+    'PHP-3.01': {'spdx': 'PHP-3.01'},
+    'Python': {'spdx': 'Python-2.0'}, # Note: references 'later versions which are not in the SPDX license list
+    'QPL': {'spdx': 'QPL-1.0'},
+    'RPL-1.1': {'spdx': 'RPL-1.1'},
+    'RPL-1.5': {'spdx': 'RPL-1.5'},
+    'RPSL': {'spdx': 'RPSL-1.0'},
+    'Ruby': {'spdx': 'Ruby'}, # Note that the text linked is 'not an exact match to the SPDX license list
+    'SGIFreeB': {'spdx': 'SGI-B-2.0'},
+    'SILOFL': {'spdx': 'OFL-1.1'},
+    'SISSL': {'spdx': 'SISSL'}, # Note that the header on the 'FSF website states version 1.0, but the link points to 'version 1.1.  The SPDX license is version 1.1
+    'SPL': {'spdx': 'SPL-1.0'},
+    'StandardMLofNJ': {'spdx': 'SMLNJ'},
+    'Unicode-DFS-2015': {'spdx': 'Unicode-DFS-2015'},
+    'Unicode-DFS-2016': {'spdx': 'Unicode-DFS-2016'},
+    'Unlicense': {'spdx': 'Unlicense'},
+    'UPL': {'spdx': 'UPL-1.0'},
+    'Vim': {'spdx': 'Vim'},
+    'W3C': {'spdx': 'W3C'},
+    'W3C-20150513': {'spdx': 'W3C-20150513'},
+    'W3C-19980720': {'spdx': 'W3C-19980720'},
+    'Watcom': {'spdx': 'Watcom-1.0'},
+    'WTFPL': {'spdx': 'WTFPL'},
+    'X11License': {'spdx': 'X11'},
+    'XFree861.1License': {'spdx': 'XFree86-1.1'},
+    'xinetd': {'spdx': 'xinetd'},
+    'Yahoo': {'spdx': 'YPL-1.1'},
+    'Zend': {'spdx': 'Zend-2.0'},
+    'Zimbra': {'spdx': 'Zimbra-1.3'},
+    'ZLib': {'spdx': 'Zlib'},
+    'Zope': {'spdx': 'ZPL-1.1'}, # Note the FSF refers to version 1.0 and SPDX uses version 1.1 - it should be verified that 1.1 should be included
+    'ZPL-2.0': {'spdx': 'ZPL-2.0'},
+    'ZPL-2.1': {'spdx': 'ZPL-2.1'},
 
     # FIXME: still working through this
 }
