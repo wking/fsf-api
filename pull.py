@@ -116,6 +116,7 @@ def get(uri):
 
 
 def extract(root, base_uri=None):
+    oids = set()
     licenses = {}
     for dl in root.iter(tag='{http://www.w3.org/1999/xhtml}dl'):
         try:
@@ -127,6 +128,7 @@ def extract(root, base_uri=None):
             if 'id' not in a.attrib:
                 continue
             oid = a.attrib['id']
+            oids.add(oid)
             for id in SPLITS.get(oid, [oid]):
                 license = {
                     'tags': tags.copy(),
@@ -147,6 +149,10 @@ def extract(root, base_uri=None):
                     licenses[id] = license
                 else:
                     licenses[id]['tags'].update(tags)
+    unused_splits = set(SPLITS.keys()).difference(oids)
+    if unused_splits:
+        raise ValueError('unused SPLITS keys: {}'.format(
+            ', '.join(sorted(unused_splits))))
     return licenses
 
 
