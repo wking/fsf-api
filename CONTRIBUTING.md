@@ -14,3 +14,5 @@ After committing a change to `pull.py` in `fsf-api`, change into the data direct
     $ cd data
     $ make commit
     $ git push origin gh-pages
+
+The content of the `master` branch is available under [the MIT license](LICENSE.md).
