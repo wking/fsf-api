@@ -157,7 +157,7 @@ IDENTIFIERS = {
     'CommonPublicLicense10': {'spdx': 'CPL-1.0'},
     'cpol': {'spdx': 'CPOL-1.02'},
     'Condor': {'spdx': 'Condor-1.1'},
-    'ECL2.0': {'spdx': 'GPL-2.0 WITH eCos-exception-2.0'},
+    'ECL2.0': {'spdx': 'ECL-2.0'},
     'eCos11': {'spdx': 'RHeCos-1.1'},
     'eCos2.0': {'spdx': 'GPL-2.0+ WITH eCos-exception-2.0'},
     'EPL': {'spdx': 'EPL-1.0'},
