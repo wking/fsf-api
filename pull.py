@@ -69,6 +69,11 @@ SPLITS = {
         'OSL-2.1',
         'OSL-3.0',
     ],
+    'PythonOld': [ # 1.6b1 through 2.0 and 2.1
+        'Python1.6b1',
+        'Python2.0',
+        'Python2.1',
+    ],
     'Zope2.0': [ # versions 2.0 and 2.1
         'Zope2.0',
         'Zope2.1',
@@ -173,6 +178,7 @@ IDENTIFIERS = {
     'OSL-2.1': {'spdx': 'OSL-2.1'},
     'OSL-3.0': {'spdx': 'OSL-3.0'},
     'PHP-3.01': {'spdx': 'PHP-3.01'},
+    'Python2.0': {'spdx': 'Python-2.0'},
     'QPL': {'spdx': 'QPL-1.0'},
     'RPSL': {'spdx': 'RPSL-1.0'},
     'SGIFreeB': {'spdx': 'SGI-B-2.0'},
