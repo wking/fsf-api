@@ -181,6 +181,7 @@ IDENTIFIERS = {
     'Python2.0': {'spdx': 'Python-2.0'},
     'QPL': {'spdx': 'QPL-1.0'},
     'RPSL': {'spdx': 'RPSL-1.0'},
+    'Ruby': {'spdx': 'Ruby'},
     'SGIFreeB': {'spdx': 'SGI-B-2.0'},
     'SILOFL': {'spdx': 'OFL-1.1'},
     'SPL': {'spdx': 'SPL-1.0'},
