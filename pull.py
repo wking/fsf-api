@@ -165,6 +165,8 @@ def save(licenses, dir=os.curdir):
         index[id] = {'name': license['name']}
         if 'identifiers' in license:
             index[id]['identifiers'] = license['identifiers']
+        if 'tags' in license:
+                index[id]['tags'] = sorted(license['tags'])
     with open(os.path.join(dir, 'licenses.json'), 'w') as f:
         json.dump(obj=index, fp=f, indent=2, sort_keys=True)
         f.write('\n')
