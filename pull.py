@@ -19,7 +19,7 @@ URI = 'https://www.gnu.org/licenses/license-list.html'
 
 TAGS = {
     'blue': {'viewpoint'},
-    'green': {'glp-compatible', 'libre'},
+    'green': {'gpl-2-compatible', 'gpl-3-compatible', 'libre'},
     'orange': {'libre'},
     'purple': {'fdl-compatible', 'libre'},
     'red': {'non-free'},
@@ -78,6 +78,15 @@ SPLITS = {
         'Zope2.0',
         'Zope2.1',
     ],
+}
+
+TAG_OVERRIDES = {
+    'AGPLv3.0': {'libre', 'gpl-3-compatible'},
+    'ECL2.0': {'libre', 'gpl-3-compatible'},
+    'freetype': {'libre', 'gpl-3-compatible'},
+    'GNUGPLv3': {'libre', 'gpl-3-compatible'},
+    'GPLv2': {'libre', 'gpl-2-compatible'},
+    'LGPLv3': {'libre', 'gpl-3-compatible'},
 }
 
 IDENTIFIERS = {
@@ -226,7 +235,7 @@ def extract(root, base_uri=None):
             oids.add(oid)
             for id in SPLITS.get(oid, [oid]):
                 license = {
-                    'tags': tags.copy(),
+                    'tags': TAG_OVERRIDES.get(id, tags).copy(),
                 }
                 if a.text and a.text.strip():
                     license['name'] = a.text.strip()
