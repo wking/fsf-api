@@ -11,7 +11,22 @@ Ideally we'll hand this repository over to the FSF once they're ready to maintai
 
 You can pull the set of identifiers from [https://wking.github.io/fsf-api/licenses.json](https://wking.github.io/fsf-api/licenses.json).
 
-You can pull an individual license from `https://wking.github.io/fsf-api/{id}.json`, for example [https://wking.github.io/fsf-api/Expat.json](https://wking.github.io/fsf-api/Expat.json).
+You can pull an individual license from a few places:
+
+* Using their FSF ID:
+
+        https://wking.github.io/fsf-api/{id}.json
+
+    For example [https://wking.github.io/fsf-api/Expat.json](https://wking.github.io/fsf-api/Expat.json).
+
+* Using a non-FSF ID, according to the mapping between other scheme and the FSF scheme asserted by this API:
+
+        https://wking.github.io/fsf-api/{scheme}/{id}.json
+
+    For example [https://wking.github.io/fsf-api/spdx/MIT.json](https://wking.github.io/fsf-api/spdx/MIT.json).
+    This API currently [attempts](#caveats) to maintain the following mappings:
+
+    * `spdx`, using [the SPDX identifiers][spdx-list].
 
 ## Caveats
 
@@ -41,3 +56,4 @@ Until these hacks are addressed, license IDs and the `identifiers` field should 
 [osi-api-non-canon-2]: https://github.com/OpenSourceOrg/licenses/issues/47
 [osi-api-noncanon-1]: https://github.com/OpenSourceOrg/licenses/tree/f7ff223f9694ca0d5114fc82e43c74b5c5087891#is-this-authoritative
 [osi-api]: https://api.opensource.org/
+[spdx-list]: https://spdx.org/licenses/
