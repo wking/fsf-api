@@ -9,17 +9,23 @@ Ideally we'll hand this repository over to the FSF once they're ready to maintai
 
 ## Endpoints
 
-You can pull the set of identifiers from [https://wking.github.io/fsf-api/licenses.json](https://wking.github.io/fsf-api/licenses.json).
+<a name="licenses.json"></a>
+You can pull an array of identifiers from [https://wking.github.io/fsf-api/licenses.json](https://wking.github.io/fsf-api/licenses.json).
+
+<a name="licenses-full.json"></a>
+You can pull an object with all the license data [https://wking.github.io/fsf-api/licenses-full.json](https://wking.github.io/fsf-api/licenses-full.json).
 
 You can pull an individual license from a few places:
 
-* Using their FSF ID:
+* <a name="by-fsf-id"></a>
+    Using their FSF ID:
 
         https://wking.github.io/fsf-api/{id}.json
 
     For example [https://wking.github.io/fsf-api/Expat.json](https://wking.github.io/fsf-api/Expat.json).
 
-* Using a non-FSF ID, according to the mapping between other scheme and the FSF scheme asserted by this API:
+* <a name="by-non-fsf-id"></a>
+    Using a non-FSF ID, according to the mapping between other scheme and the FSF scheme asserted by this API:
 
         https://wking.github.io/fsf-api/{scheme}/{id}.json
 

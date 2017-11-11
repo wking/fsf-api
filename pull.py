@@ -172,10 +172,12 @@ def save(licenses, dir=os.curdir):
     with open(os.path.join(dir, 'licenses.json'), 'w') as f:
         json.dump(obj=index, fp=f, indent=2)
         f.write('\n')
+    full_index = {}
     for id, license in licenses.items():
         license = license.copy()
         if 'tags' in license:
             license['tags'] = sorted(license['tags'])
+        full_index[id] = license
         license_path = os.path.join(dir, '{}.json'.format(id))
         with open(license_path, 'w') as f:
             json.dump(obj=license, fp=f, indent=2, sort_keys=True)
@@ -185,6 +187,9 @@ def save(licenses, dir=os.curdir):
             os.makedirs(scheme_dir, exist_ok=True)
             id_path = os.path.join(scheme_dir, '{}.json'.format(identifier))
             os.link(license_path, id_path)
+    with open(os.path.join(dir, 'licenses-full.json'), 'w') as f:
+        json.dump(obj=full_index, fp=f, indent=2, sort_keys=True)
+        f.write('\n')
 
 
 if __name__ == '__main__':
