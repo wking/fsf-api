@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 import glob
+import itertools
 import json
 import os
 import sys
@@ -262,23 +263,37 @@ def extract(root, base_uri=None):
 
 def save(licenses, dir=os.curdir):
     os.makedirs(dir, exist_ok=True)
-    for path in glob.glob(os.path.join(dir, '*.json')):
+    if sys.version_info >= (3, 5):
+        paths = glob.glob(os.path.join(dir, '**', '*.json'), recursive=True)
+    else:
+        paths = itertools.chain(
+            glob.glob(os.path.join(dir, '*.json')),
+            glob.glob(os.path.join(dir, '*', '*.json')),
+        )
+    for path in paths:
         os.remove(path)
-    index = {}
-    for id, license in licenses.items():
-        index[id] = {'name': license['name']}
-        if 'identifiers' in license:
-            index[id]['identifiers'] = license['identifiers']
+    index = sorted(licenses.keys())
     with open(os.path.join(dir, 'licenses.json'), 'w') as f:
-        json.dump(obj=index, fp=f, indent=2, sort_keys=True)
+        json.dump(obj=index, fp=f, indent=2)
         f.write('\n')
+    full_index = {}
     for id, license in licenses.items():
         license = license.copy()
         if 'tags' in license:
             license['tags'] = sorted(license['tags'])
-        with open(os.path.join(dir, '{}.json'.format(id)), 'w') as f:
+        full_index[id] = license
+        license_path = os.path.join(dir, '{}.json'.format(id))
+        with open(license_path, 'w') as f:
             json.dump(obj=license, fp=f, indent=2, sort_keys=True)
             f.write('\n')
+        for scheme, identifier in license.get('identifiers', {}).items():
+            scheme_dir = os.path.join(dir, scheme)
+            os.makedirs(scheme_dir, exist_ok=True)
+            id_path = os.path.join(scheme_dir, '{}.json'.format(identifier))
+            os.link(license_path, id_path)
+    with open(os.path.join(dir, 'licenses-full.json'), 'w') as f:
+        json.dump(obj=full_index, fp=f, indent=2, sort_keys=True)
+        f.write('\n')
 
 
 if __name__ == '__main__':
