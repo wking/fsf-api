@@ -48,6 +48,7 @@ SPLITS = {
         'CC-BY-ND-3.0',
         'CC-BY-ND-4.0',
     ],
+    'ccbynd': ['CC-BY-ND-4.0'],  # unify (multi-tag)
     'FDL': [
         'FDLv1.1',
         'FDLv1.2',
