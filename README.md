@@ -40,7 +40,9 @@ Licenses have the following properties:
 
 * FSF ID: a short slug identifying the license.
 * `name`: a short string naming the license.
-* `uri`: the FSF's recommendend URI for the license.
+* `uris`: an array of URIs for the license.
+    The first entry in this array will always be an entry on the [the FSF's HTML page][fsf-list].
+    The order of the remaining entries is not significant.
 * `tags`: an array of FSF categories for the license.
     The FSF currently defines the following categories:
 

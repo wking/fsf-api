@@ -243,11 +243,12 @@ def extract(root, base_uri=None):
                     license['name'] = a.text.strip()
                 else:
                     continue
+                uris = ['{}#{}'.format(base_uri, oid)]
                 uri = a.attrib.get('href')
                 if uri:
                     if base_uri:
-                        uri = urllib.parse.urljoin(base=base_uri, url=uri)
-                    license['uri'] = uri
+                        uris.append(urllib.parse.urljoin(base=base_uri, url=uri))
+                license['uris'] = uris
                 identifiers = IDENTIFIERS.get(id)
                 if identifiers:
                     license['identifiers'] = identifiers
@@ -255,6 +256,9 @@ def extract(root, base_uri=None):
                     licenses[id] = license
                 else:
                     licenses[id]['tags'].update(tags)
+                    for uri in uris:
+                        if uri not in licenses[id]['uris']:
+                            licenses[id]['uris'].append(uri)
     unused_splits = set(SPLITS.keys()).difference(oids)
     if unused_splits:
         raise ValueError('unused SPLITS keys: {}'.format(
