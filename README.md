@@ -38,7 +38,8 @@ You can pull an individual license from a few places:
 
 Licenses have the following properties:
 
-* FSF ID: a short slug identifying the license.
+* `id`: a short slug identifying the license.
+    In [`licenses-full.json`](#licenses-full.json), this is information is in the in root object key and not duplicated in the value.
 * `name`: a short string naming the license.
 * `uris`: an array of URIs for the license.
     The first entry in this array will always be an entry on the [the FSF's HTML page][fsf-list].

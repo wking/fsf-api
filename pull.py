@@ -286,7 +286,8 @@ def save(licenses, dir=os.curdir):
         license = license.copy()
         if 'tags' in license:
             license['tags'] = sorted(license['tags'])
-        full_index[id] = license
+        full_index[id] = license.copy()
+        license['id'] = id
         license_path = os.path.join(dir, '{}.json'.format(id))
         with open(license_path, 'w') as f:
             json.dump(obj=license, fp=f, indent=2, sort_keys=True)
