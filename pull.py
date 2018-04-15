@@ -301,7 +301,7 @@ def save(licenses, base_uri, dir=os.curdir):
         },
     }
     with open(os.path.join(schema_dir, 'license.jsonld'), 'w') as f:
-        json.dump(obj=license_schema, fp=f, indent=2)
+        json.dump(obj=license_schema, fp=f, indent=2, sort_keys=True)
         f.write('\n')
     license_schema_uri = urllib.parse.urljoin(
         base=base_uri, url='schema/license.jsonld')
