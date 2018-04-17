@@ -51,18 +51,18 @@ Licenses have the following properties:
     * `fdl-compatible`: [licenses that are FDL-compatible][fsf-list-fdl-compatible].
     * `libre`: licenses that are either [GPL-compatible][fsf-list-gpl-compatible], [FDL-compatible][fsf-list-fdl-compatible], [or][fsf-list-free-software] [are][fsf-list-free-documentation] [otherwise][fsf-list-practical] [free][fsf-list-font].
     * `viewpoint`: [licenses for works stating a viewpoint][fsf-list-viewpoint].
-    * `non-free`: licenses that [are][fsf-list-non-free-software] [non-free][].
+    * `non-free`: licenses that [are][fsf-list-non-free-software] [non-free][fsf-list-non-free-documentation].
 * `identifiers`: an object with mappings to other license lists.
     This API currently [attempts](#caveats) to maintain the following mappings:
 
     * `spdx`: For licenses with SPDX IDs, the `spdx` value will hold an array of [SPDX identifiers][spdx-list].
-        Licenses may have multiple SPDX entries when SPDX list defines per-grant IDs that share the same license (e.g. [`GPL-3.0-only`][spdx-gpl-3.0-only] and `GPL-3.0-or-later`][spdx-gpl-3.0-or-later]).
+        Licenses may have multiple SPDX entries when SPDX list defines per-grant IDs that share the same license (e.g. [`GPL-3.0-only`][spdx-gpl-3.0-only] and [`GPL-3.0-or-later`][spdx-gpl-3.0-or-later]).
         The first entry in the SPDX array is the one that most closely matches the FSF license.
         For example, the FSF's [`GNUGPLv3`][fsf-gplv3] text has:
 
         > However, most software released under GPLv2 allows you to use the terms of later versions of the GPL as well.
 
-        and the GPLv3 text [suggests an “any later version” grant][gplv3], so `GPL-3.0-or-later` is the first SPDX identifier, `GPL-3.0-only` is the second, and the deprecated `GPL-3.0` is the third.
+        and the GPLv3 text [suggests an “any later version” grant][gplv3-howto], so `GPL-3.0-or-later` is the first SPDX identifier, `GPL-3.0-only` is the second, and the deprecated `GPL-3.0` is the third.
 
 ## Caveats
 
