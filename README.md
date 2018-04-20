@@ -80,7 +80,7 @@ There are currently some hacks in [the pulling script](pull.py):
 * `TAG_OVERRIDES`, which sets `tags` where the human-readable text on the [FSF's annotated list][fsf-list] has more detail than the easily-machine-readable content.
     For example, the FSF currently only distinguishes between `gpl-2-compatible` and `gpl-3-compatible` in text, so licenses that are only compatible with one or the other need tag overrides.
 
-Until these hacks are addressed, license IDs and the `tags` and `identifiers` field should be taken with a grain of salt.
+Until these hacks are addressed, license IDs and the `tags` and `identifiers` fields should be taken with a grain of salt.
 
 ## Contributing
 
