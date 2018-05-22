@@ -76,6 +76,10 @@ SPLITS = {
         'Python2.0',
         'Python2.1',
     ],
+    'SILOFL': [ # title has 1.1 but text says the same metadata applies to 1.0
+        'SILOFL-1.0',
+        'SILOFL-1.1',
+    ],
     'Zope2.0': [ # versions 2.0 and 2.1
         'Zope2.0',
         'Zope2.1',
@@ -194,7 +198,8 @@ IDENTIFIERS = {
     'RPSL': {'spdx': ['RPSL-1.0']},
     'Ruby': {'spdx': ['Ruby']},
     'SGIFreeB': {'spdx': ['SGI-B-2.0']},
-    'SILOFL': {'spdx': ['OFL-1.1']},
+    'SILOFL-1.0': {'spdx': ['OFL-1.0']},
+    'SILOFL-1.1': {'spdx': ['OFL-1.1']},
     'SPL': {'spdx': ['SPL-1.0']},
     'StandardMLofNJ': {'spdx': ['SMLNJ', 'StandardML-NJ']},
     'Unlicense': {'spdx': ['Unlicense']},
