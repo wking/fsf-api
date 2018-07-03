@@ -141,7 +141,7 @@ IDENTIFIERS = {
     'eCos11': {'spdx': ['RHeCos-1.1']},
     'eCos2.0': {'spdx': ['GPL-2.0+ WITH eCos-exception-2.0', 'eCos-2.0']},
     'EPL': {'spdx': ['EPL-1.0']},
-    'EPL2': {'spdx': ['EPL-2.0']}, # not in license-list-XML yet
+    'EPL2': {'spdx': ['EPL-2.0']},
     'EUDataGrid': {'spdx': ['EUDatagrid']},
     'EUPL': {'spdx': ['EUPL-1.1']},
     'Eiffel': {'spdx': ['EFL-2.0']},
