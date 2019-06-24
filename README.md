@@ -88,7 +88,7 @@ Until these hacks are addressed, license IDs and the `tags` and `identifiers` fi
 
 [automated-matching]: https://github.com/spdx/license-list-XML/issues/418
 [fsf-afl]: https://www.gnu.org/licenses/license-list.html#AcademicFreeLicense
-[fsf-api]: https://lists.spdx.org/pipermail/spdx-legal/2017-October/002281.html
+[fsf-api]: https://lists.spdx.org/g/Spdx-legal/topic/providing_access_to_fsf/22080894
 [fsf-freebsd-fdl]: https://www.gnu.org/licenses/license-list.html#FreeBSDDL
 [fsf-freebsd-gpl]: https://www.gnu.org/licenses/license-list.html#FreeBSD
 [fsf-gplv3]: https://www.gnu.org/licenses/license-list.html#GNUGPLv3
