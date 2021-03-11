@@ -3,17 +3,17 @@
 # SPDX-License-Identifier: MIT
 
 import glob
+import html
+import io
 import itertools
 import json
 import os
+import re
 import sys
 import urllib.parse
 import urllib.request
 
-try:
-    from lxml import etree
-except ImportError:
-    import xml.etree.ElementTree as etree
+import lxml.etree
 
 
 URI = 'https://www.gnu.org/licenses/license-list.html'
@@ -221,10 +221,21 @@ IDENTIFIERS = {
 }
 
 
+def convert_html_escapes_to_xml(html_text):
+    html_entities = set(
+        re.findall(r'&(?!quot|lt|gt|amp|apos)[a-zA-Z]{1,30};', html_text))
+    for entity in html_entities:
+        html_text = html_text.replace(entity, html.unescape(entity))
+    return html_text
+
+
 def get(uri):
-    parser = etree.XMLParser(ns_clean=True, resolve_entities=False)
+    parser = lxml.etree.XMLParser(ns_clean=True, resolve_entities=False)
     with urllib.request.urlopen(uri) as response:
-        return etree.parse(response, base_url=uri, parser=parser)
+        response_data = response.read().decode()
+    response_data = convert_html_escapes_to_xml(response_data)
+    response_data_io = io.StringIO(response_data)
+    return lxml.etree.parse(response_data_io, base_url=uri, parser=parser)
 
 
 def extract(root, base_uri=None):
