@@ -5,7 +5,6 @@
 import glob
 import html
 import io
-import itertools
 import json
 import os
 import re
@@ -260,7 +259,7 @@ def extract(root, base_uri=None):
                     license['name'] = a.text.strip()
                 else:
                     continue
-                uris = ['{}#{}'.format(base_uri, oid)]
+                uris = [f'{base_uri}#{oid}']
                 uri = a.attrib.get('href')
                 if uri:
                     if base_uri:
@@ -286,13 +285,7 @@ def extract(root, base_uri=None):
 def save(licenses, base_uri, dir=os.curdir):
     schema_dir = os.path.join(dir, 'schema')
     os.makedirs(schema_dir, exist_ok=True)
-    if sys.version_info >= (3, 5):
-        paths = glob.glob(os.path.join(dir, '**', '*.json'), recursive=True)
-    else:
-        paths = itertools.chain(
-            glob.glob(os.path.join(dir, '*.json')),
-            glob.glob(os.path.join(dir, '*', '*.json')),
-        )
+    paths = glob.glob(os.path.join(dir, '**', '*.json'), recursive=True)
     for path in paths:
         os.remove(path)
     license_schema = {
@@ -355,7 +348,7 @@ def save(licenses, base_uri, dir=os.curdir):
         full_index['licenses'][id] = license.copy()
         license['@context'] = urllib.parse.urljoin(
             base=base_uri, url='schema/license.jsonld')
-        license_path = os.path.join(dir, '{}.json'.format(id))
+        license_path = os.path.join(dir, f'{id}.json')
         with open(license_path, 'w', encoding='utf-8') as f:
             json.dump(obj=license, fp=f, indent=2, sort_keys=True)
             f.write('\n')
@@ -365,7 +358,7 @@ def save(licenses, base_uri, dir=os.curdir):
             if isinstance(identifiers, str):
                 identifiers = [identifiers]
             for identifier in identifiers:
-                id_path = os.path.join(scheme_dir, '{}.json'.format(identifier))
+                id_path = os.path.join(scheme_dir, f'{identifier}.json')
                 os.link(license_path, id_path)
     with open(
         os.path.join(dir, 'licenses-full.json'), 'w', encoding='utf-8'
