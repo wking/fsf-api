@@ -251,12 +251,12 @@ def extract(root, base_uri=None):
                 continue
             oid = a.attrib['id']
             oids.add(oid)
-            for id in SPLITS.get(oid, [oid]):
-                license = {
-                    'tags': TAG_OVERRIDES.get(id, tags).copy(),
+            for license_id in SPLITS.get(oid, [oid]):
+                license_data = {
+                    'tags': TAG_OVERRIDES.get(license_id, tags).copy(),
                 }
                 if a.text and a.text.strip():
-                    license['name'] = a.text.strip()
+                    license_data['name'] = a.text.strip()
                 else:
                     continue
                 uris = [f'{base_uri}#{oid}']
@@ -264,17 +264,17 @@ def extract(root, base_uri=None):
                 if uri:
                     if base_uri:
                         uris.append(urllib.parse.urljoin(base=base_uri, url=uri))
-                license['uris'] = uris
-                identifiers = IDENTIFIERS.get(id)
+                license_data['uris'] = uris
+                identifiers = IDENTIFIERS.get(license_id)
                 if identifiers:
-                    license['identifiers'] = identifiers
-                if id not in licenses:
-                    licenses[id] = license
+                    license_data['identifiers'] = identifiers
+                if license_id not in licenses:
+                    licenses[license_id] = license_data
                 else:
-                    licenses[id]['tags'].update(tags)
+                    licenses[license_id]['tags'].update(tags)
                     for uri in uris:
-                        if uri not in licenses[id]['uris']:
-                            licenses[id]['uris'].append(uri)
+                        if uri not in licenses[license_id]['uris']:
+                            licenses[license_id]['uris'].append(uri)
     unused_splits = set(SPLITS.keys()).difference(oids)
     if unused_splits:
         raise ValueError('unused SPLITS keys: {}'.format(
@@ -282,10 +282,10 @@ def extract(root, base_uri=None):
     return licenses
 
 
-def save(licenses, base_uri, dir=os.curdir):
-    schema_dir = os.path.join(dir, 'schema')
+def save(licenses, base_uri, output_dir=os.curdir):
+    schema_dir = os.path.join(output_dir, 'schema')
     os.makedirs(schema_dir, exist_ok=True)
-    paths = glob.glob(os.path.join(dir, '**', '*.json'), recursive=True)
+    paths = glob.glob(os.path.join(output_dir, '**', '*.json'), recursive=True)
     for path in paths:
         os.remove(path)
     license_schema = {
@@ -332,7 +332,7 @@ def save(licenses, base_uri, dir=os.curdir):
         base=base_uri, url='schema/licenses.jsonld')
     index = sorted(licenses.keys())
     with open(
-        os.path.join(dir, 'licenses.json'), 'w', encoding='utf-8'
+        os.path.join(output_dir, 'licenses.json'), 'w', encoding='utf-8'
     ) as f:
         json.dump(obj=index, fp=f, indent=2, sort_keys=True)
         f.write('\n')
@@ -340,20 +340,20 @@ def save(licenses, base_uri, dir=os.curdir):
         '@context': licenses_schema_uri,
         'licenses': {},
     }
-    for id, license in licenses.items():
-        license = license.copy()
-        if 'tags' in license:
-            license['tags'] = sorted(license['tags'])
-        license['id'] = id
-        full_index['licenses'][id] = license.copy()
-        license['@context'] = urllib.parse.urljoin(
+    for license_id, license_data in licenses.items():
+        license_data = license_data.copy()
+        if 'tags' in license_data:
+            license_data['tags'] = sorted(license_data['tags'])
+        license_data['id'] = license_id
+        full_index['licenses'][license_id] = license_data.copy()
+        license_data['@context'] = urllib.parse.urljoin(
             base=base_uri, url='schema/license.jsonld')
-        license_path = os.path.join(dir, f'{id}.json')
+        license_path = os.path.join(output_dir, f'{license_id}.json')
         with open(license_path, 'w', encoding='utf-8') as f:
-            json.dump(obj=license, fp=f, indent=2, sort_keys=True)
+            json.dump(obj=license_data, fp=f, indent=2, sort_keys=True)
             f.write('\n')
-        for scheme, identifiers in license.get('identifiers', {}).items():
-            scheme_dir = os.path.join(dir, scheme)
+        for scheme, identifiers in license_data.get('identifiers', {}).items():
+            scheme_dir = os.path.join(output_dir, scheme)
             os.makedirs(scheme_dir, exist_ok=True)
             if isinstance(identifiers, str):
                 identifiers = [identifiers]
@@ -361,7 +361,7 @@ def save(licenses, base_uri, dir=os.curdir):
                 id_path = os.path.join(scheme_dir, f'{identifier}.json')
                 os.link(license_path, id_path)
     with open(
-        os.path.join(dir, 'licenses-full.json'), 'w', encoding='utf-8'
+        os.path.join(output_dir, 'licenses-full.json'), 'w', encoding='utf-8'
     ) as f:
         json.dump(obj=full_index, fp=f, indent=2, sort_keys=True)
         f.write('\n')
@@ -370,9 +370,9 @@ def save(licenses, base_uri, dir=os.curdir):
 def main(sys_argv=None):
     if sys_argv is None:
         sys_argv = sys.argv
-    dir = os.curdir
+    output_dir = os.curdir
     if sys_argv and len(sys_argv) > 1:
-        dir = sys_argv[1]
+        output_dir = sys_argv[1]
     tree = get(uri=URI)
     root = tree.getroot()
     licenses = extract(root=root, base_uri=URI)
@@ -381,7 +381,11 @@ def main(sys_argv=None):
     if unused_identifiers:
         raise ValueError('unused IDENTIFIERS keys: {}'.format(
             ', '.join(sorted(unused_identifiers))))
-    save(licenses=licenses, base_uri='https://wking.github.io/fsf-api/', dir=dir)
+    save(
+        licenses=licenses,
+        base_uri='https://wking.github.io/fsf-api/',
+        output_dir=output_dir,
+    )
 
 
 if __name__ == '__main__':
