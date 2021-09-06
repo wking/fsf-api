@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Generate the FSF license API JSON data from the FSF license list page."""
+
 import glob
 import html
 import io
@@ -229,6 +231,7 @@ IDENTIFIERS = {
 
 
 def convert_html_escapes_to_xml(html_text):
+    """Avoid XML parsing errors by converting HTML escape codes to XML."""
     html_entities = set(
         re.findall(r'&(?!quot|lt|gt|amp|apos)[a-zA-Z]{1,30};', html_text)
     )
@@ -238,6 +241,7 @@ def convert_html_escapes_to_xml(html_text):
 
 
 def get(uri):
+    """Get the license list page data from the FSF web site."""
     parser = lxml.etree.XMLParser(ns_clean=True, resolve_entities=False)
     with urllib.request.urlopen(uri) as response:
         response_data = response.read().decode()
@@ -247,6 +251,7 @@ def get(uri):
 
 
 def extract(root, base_uri=None):
+    """Parse the license list page and extract the needed license data."""
     oids = set()
     licenses = {}
     for dl in root.iter(tag='{http://www.w3.org/1999/xhtml}dl'):
@@ -296,6 +301,7 @@ def extract(root, base_uri=None):
 
 
 def save(licenses, base_uri, output_dir=os.curdir):
+    """Save the license data to a files in the appropriate JSON schema."""
     schema_dir = os.path.join(output_dir, 'schema')
     os.makedirs(schema_dir, exist_ok=True)
     paths = glob.glob(os.path.join(output_dir, '**', '*.json'), recursive=True)
@@ -382,6 +388,7 @@ def save(licenses, base_uri, output_dir=os.curdir):
 
 
 def main(sys_argv=None):
+    """Load the license list page, parse it and generate the API output."""
     if sys_argv is None:
         sys_argv = sys.argv
     output_dir = os.curdir
