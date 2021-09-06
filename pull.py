@@ -26,21 +26,21 @@ TAGS = {
 }
 
 SPLITS = {
-    'AcademicFreeLicense': [ # all versions through 3.0
+    'AcademicFreeLicense': [  # all versions through 3.0
         'AcademicFreeLicense1.1',
         'AcademicFreeLicense1.2',
         'AcademicFreeLicense2.0',
         'AcademicFreeLicense2.1',
         'AcademicFreeLicense3.0',
     ],
-    'CC-BY-NC': [ # any version (!)
+    'CC-BY-NC': [  # any version (!)
         'CC-BY-NC-1.0',
         'CC-BY-NC-2.0',
         'CC-BY-NC-2.5',
         'CC-BY-NC-3.0',
         'CC-BY-NC-4.0',
     ],
-    'CC-BY-ND': [ # any version
+    'CC-BY-ND': [  # any version
         'CC-BY-ND-1.0',
         'CC-BY-ND-2.0',
         'CC-BY-ND-2.5',
@@ -53,33 +53,33 @@ SPLITS = {
         'FDLv1.2',
         'FDLv1.3',
     ],
-    'FDLOther': [ # unify with FDL (multi-tag)
+    'FDLOther': [  # unify with FDL (multi-tag)
         'FDLv1.1',
         'FDLv1.2',
         'FDLv1.3',
     ],
-    'FreeBSDDL': ['FreeBSD'], # unify (multi-tag)
-    'NPL': [ # versions 1.0 and 1.1
+    'FreeBSDDL': ['FreeBSD'],  # unify (multi-tag)
+    'NPL': [  # versions 1.0 and 1.1
         'NPL-1.0',
         'NPL-1.1',
     ],
-    'OSL': [ # any version through 3.0
+    'OSL': [  # any version through 3.0
         'OSL-1.0',
         'OSL-1.1',
         'OSL-2.0',
         'OSL-2.1',
         'OSL-3.0',
     ],
-    'PythonOld': [ # 1.6b1 through 2.0 and 2.1
+    'PythonOld': [  # 1.6b1 through 2.0 and 2.1
         'Python1.6b1',
         'Python2.0',
         'Python2.1',
     ],
-    'SILOFL': [ # title has 1.1 but text says the same metadata applies to 1.0
+    'SILOFL': [  # title has 1.1 but text says the same metadata applies to 1.0
         'SILOFL-1.0',
         'SILOFL-1.1',
     ],
-    'Zope2.0': [ # versions 2.0 and 2.1
+    'Zope2.0': [  # versions 2.0 and 2.1
         'Zope2.0',
         'Zope2.1',
     ],
@@ -152,9 +152,13 @@ IDENTIFIERS = {
     'FreeBSD': {'spdx': ['BSD-2-Clause-FreeBSD']},
     'freetype': {'spdx': ['FTL']},
     'GNUAllPermissive': {'spdx': ['FSFAP']},
-    'GNUGPLv3': {'spdx': ['GPL-3.0-or-later', 'GPL-3.0-only', 'GPL-3.0', 'GPL-3.0+']},
+    'GNUGPLv3': {
+        'spdx': ['GPL-3.0-or-later', 'GPL-3.0-only', 'GPL-3.0', 'GPL-3.0+']
+    },
     'gnuplot': {'spdx': ['gnuplot']},
-    'GPLv2': {'spdx': ['GPL-2.0-or-later', 'GPL-2.0-only', 'GPL-2.0', 'GPL-2.0+']},
+    'GPLv2': {
+        'spdx': ['GPL-2.0-or-later', 'GPL-2.0-only', 'GPL-2.0', 'GPL-2.0+']
+    },
     'HPND': {'spdx': ['HPND']},
     'IBMPL': {'spdx': ['IPL-1.0']},
     'iMatix': {'spdx': ['iMatix']},
@@ -164,8 +168,12 @@ IDENTIFIERS = {
     'IPAFONT': {'spdx': ['IPA']},
     'ISC': {'spdx': ['ISC']},
     'JSON': {'spdx': ['JSON']},
-    'LGPLv3': {'spdx': ['LGPL-3.0-or-later', 'LGPL-3.0-only', 'LGPL-3.0', 'LGPL-3.0+']},
-    'LGPLv2.1': {'spdx': ['LGPL-2.1-or-later', 'LGPL-2.1-only', 'LGPL-2.1', 'LGPL-2.1+']},
+    'LGPLv3': {
+        'spdx': ['LGPL-3.0-or-later', 'LGPL-3.0-only', 'LGPL-3.0', 'LGPL-3.0+']
+    },
+    'LGPLv2.1': {
+        'spdx': ['LGPL-2.1-or-later', 'LGPL-2.1-only', 'LGPL-2.1', 'LGPL-2.1+']
+    },
     'LPPL-1.2': {'spdx': ['LPPL-1.2']},
     'LPPL-1.3a': {'spdx': ['LPPL-1.3a']},
     'lucent102': {'spdx': ['LPL-1.02']},
@@ -222,7 +230,8 @@ IDENTIFIERS = {
 
 def convert_html_escapes_to_xml(html_text):
     html_entities = set(
-        re.findall(r'&(?!quot|lt|gt|amp|apos)[a-zA-Z]{1,30};', html_text))
+        re.findall(r'&(?!quot|lt|gt|amp|apos)[a-zA-Z]{1,30};', html_text)
+    )
     for entity in html_entities:
         html_text = html_text.replace(entity, html.unescape(entity))
     return html_text
@@ -264,7 +273,9 @@ def extract(root, base_uri=None):
                 uri = a.attrib.get('href')
                 if uri:
                     if base_uri:
-                        uris.append(urllib.parse.urljoin(base=base_uri, url=uri))
+                        uris.append(
+                            urllib.parse.urljoin(base=base_uri, url=uri)
+                        )
                 license_data['uris'] = uris
                 identifiers = IDENTIFIERS.get(license_id)
                 if identifiers:
@@ -278,8 +289,9 @@ def extract(root, base_uri=None):
                             licenses[license_id]['uris'].append(uri)
     unused_splits = set(SPLITS.keys()).difference(oids)
     if unused_splits:
-        raise ValueError('unused SPLITS keys: {}'.format(
-            ', '.join(sorted(unused_splits))))
+        raise ValueError(
+            'unused SPLITS keys: {}'.format(', '.join(sorted(unused_splits)))
+        )
     return licenses
 
 
@@ -292,9 +304,7 @@ def save(licenses, base_uri, output_dir=os.curdir):
     license_schema = {
         '@context': {
             'schema': 'https://schema.org/',
-            'id': {
-                '@id': 'schema:identifier'
-            },
+            'id': {'@id': 'schema:identifier'},
             'name': {
                 '@id': 'schema:name',
             },
@@ -317,7 +327,8 @@ def save(licenses, base_uri, output_dir=os.curdir):
         json.dump(obj=license_schema, fp=f, indent=2, sort_keys=True)
         f.write('\n')
     license_schema_uri = urllib.parse.urljoin(
-        base=base_uri, url='schema/license.jsonld')
+        base=base_uri, url='schema/license.jsonld'
+    )
     licenses_schema = license_schema.copy()
     licenses_schema['@context']['licenses'] = {
         '@container': '@index',
@@ -330,7 +341,8 @@ def save(licenses, base_uri, output_dir=os.curdir):
         json.dump(obj=licenses_schema, fp=f, indent=2, sort_keys=True)
         f.write('\n')
     licenses_schema_uri = urllib.parse.urljoin(
-        base=base_uri, url='schema/licenses.jsonld')
+        base=base_uri, url='schema/licenses.jsonld'
+    )
     index = sorted(licenses.keys())
     with open(
         os.path.join(output_dir, 'licenses.json'), 'w', encoding='utf-8'
@@ -348,7 +360,8 @@ def save(licenses, base_uri, output_dir=os.curdir):
         license_data['id'] = license_id
         full_index['licenses'][license_id] = license_data.copy()
         license_data['@context'] = urllib.parse.urljoin(
-            base=base_uri, url='schema/license.jsonld')
+            base=base_uri, url='schema/license.jsonld'
+        )
         license_path = os.path.join(output_dir, f'{license_id}.json')
         with open(license_path, 'w', encoding='utf-8') as f:
             json.dump(obj=license_data, fp=f, indent=2, sort_keys=True)
@@ -379,8 +392,11 @@ def main(sys_argv=None):
     licenses = extract(root=root, base_uri=URI)
     unused_identifiers = {key for key in IDENTIFIERS if key not in licenses}
     if unused_identifiers:
-        raise ValueError('unused IDENTIFIERS keys: {}'.format(
-            ', '.join(sorted(unused_identifiers))))
+        raise ValueError(
+            'unused IDENTIFIERS keys: {}'.format(
+                ', '.join(sorted(unused_identifiers))
+            )
+        )
     save(
         licenses=licenses,
         base_uri='https://wking.github.io/fsf-api/',
