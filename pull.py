@@ -367,10 +367,12 @@ def save(licenses, base_uri, dir=os.curdir):
         f.write('\n')
 
 
-if __name__ == '__main__':
+def main(sys_argv=None):
+    if sys_argv is None:
+        sys_argv = sys.argv
     dir = os.curdir
-    if len(sys.argv) > 1:
-        dir = sys.argv[1]
+    if sys_argv and len(sys_argv) > 1:
+        dir = sys_argv[1]
     tree = get(uri=URI)
     root = tree.getroot()
     licenses = extract(root=root, base_uri=URI)
@@ -380,3 +382,7 @@ if __name__ == '__main__':
         raise ValueError('unused IDENTIFIERS keys: {}'.format(
             ', '.join(sorted(unused_identifiers))))
     save(licenses=licenses, base_uri='https://wking.github.io/fsf-api/', dir=dir)
+
+
+if __name__ == '__main__':
+    main()
