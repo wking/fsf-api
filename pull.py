@@ -243,9 +243,10 @@ def extract(root, base_uri=None):
     for dl in root.iter(tag='{http://www.w3.org/1999/xhtml}dl'):
         try:
             tags = TAGS[dl.attrib.get('class')]
-        except KeyError:
+        except KeyError as error:
             raise ValueError(
-                'unrecognized class {!r}'.format(dl.attrib.get('class')))
+                'unrecognized class {!r}'.format(dl.attrib.get('class'))
+            ) from error
         for a in dl.iter(tag='{http://www.w3.org/1999/xhtml}a'):
             if 'id' not in a.attrib:
                 continue
@@ -376,8 +377,7 @@ def main(sys_argv=None):
     tree = get(uri=URI)
     root = tree.getroot()
     licenses = extract(root=root, base_uri=URI)
-    unused_identifiers = {
-        key for key in IDENTIFIERS.keys() if key not in licenses}
+    unused_identifiers = {key for key in IDENTIFIERS if key not in licenses}
     if unused_identifiers:
         raise ValueError('unused IDENTIFIERS keys: {}'.format(
             ', '.join(sorted(unused_identifiers))))
