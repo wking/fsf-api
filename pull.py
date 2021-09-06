@@ -317,7 +317,9 @@ def save(licenses, base_uri, dir=os.curdir):
             },
         },
     }
-    with open(os.path.join(schema_dir, 'license.jsonld'), 'w') as f:
+    with open(
+        os.path.join(schema_dir, 'license.jsonld'), 'w', encoding='utf-8'
+    ) as f:
         json.dump(obj=license_schema, fp=f, indent=2, sort_keys=True)
         f.write('\n')
     license_schema_uri = urllib.parse.urljoin(
@@ -328,13 +330,17 @@ def save(licenses, base_uri, dir=os.curdir):
         '@id': license_schema_uri,
     }
     licenses_schema.update(license_schema)
-    with open(os.path.join(schema_dir, 'licenses.jsonld'), 'w') as f:
+    with open(
+        os.path.join(schema_dir, 'licenses.jsonld'), 'w', encoding='utf-8'
+    ) as f:
         json.dump(obj=licenses_schema, fp=f, indent=2, sort_keys=True)
         f.write('\n')
     licenses_schema_uri = urllib.parse.urljoin(
         base=base_uri, url='schema/licenses.jsonld')
     index = sorted(licenses.keys())
-    with open(os.path.join(dir, 'licenses.json'), 'w') as f:
+    with open(
+        os.path.join(dir, 'licenses.json'), 'w', encoding='utf-8'
+    ) as f:
         json.dump(obj=index, fp=f, indent=2, sort_keys=True)
         f.write('\n')
     full_index = {
@@ -350,7 +356,7 @@ def save(licenses, base_uri, dir=os.curdir):
         license['@context'] = urllib.parse.urljoin(
             base=base_uri, url='schema/license.jsonld')
         license_path = os.path.join(dir, '{}.json'.format(id))
-        with open(license_path, 'w') as f:
+        with open(license_path, 'w', encoding='utf-8') as f:
             json.dump(obj=license, fp=f, indent=2, sort_keys=True)
             f.write('\n')
         for scheme, identifiers in license.get('identifiers', {}).items():
@@ -361,7 +367,9 @@ def save(licenses, base_uri, dir=os.curdir):
             for identifier in identifiers:
                 id_path = os.path.join(scheme_dir, '{}.json'.format(identifier))
                 os.link(license_path, id_path)
-    with open(os.path.join(dir, 'licenses-full.json'), 'w') as f:
+    with open(
+        os.path.join(dir, 'licenses-full.json'), 'w', encoding='utf-8'
+    ) as f:
         json.dump(obj=full_index, fp=f, indent=2, sort_keys=True)
         f.write('\n')
 
