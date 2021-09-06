@@ -4,20 +4,21 @@
 
 """Generate the FSF license API JSON data from the FSF license list page."""
 
+import argparse
 import glob
 import html
 import io
 import json
 import os
 import re
-import sys
 import urllib.parse
 import urllib.request
 
 import lxml.etree
 
 
-URI = 'https://www.gnu.org/licenses/license-list.html'
+SOURCE_URI = 'https://www.gnu.org/licenses/license-list.html'
+API_BASE_URI = 'https://wking.github.io/fsf-api/'
 
 TAGS = {
     'blue': {'viewpoint'},
@@ -387,16 +388,15 @@ def save(licenses, base_uri, output_dir=os.curdir):
         f.write('\n')
 
 
-def main(sys_argv=None):
+def generate_api(
+    output_dir=os.curdir,
+    source_uri=SOURCE_URI,
+    api_base_uri=API_BASE_URI,
+):
     """Load the license list page, parse it and generate the API output."""
-    if sys_argv is None:
-        sys_argv = sys.argv
-    output_dir = os.curdir
-    if sys_argv and len(sys_argv) > 1:
-        output_dir = sys_argv[1]
-    tree = get(uri=URI)
+    tree = get(uri=source_uri)
     root = tree.getroot()
-    licenses = extract(root=root, base_uri=URI)
+    licenses = extract(root=root, base_uri=source_uri)
     unused_identifiers = {key for key in IDENTIFIERS if key not in licenses}
     if unused_identifiers:
         raise ValueError(
@@ -406,9 +406,38 @@ def main(sys_argv=None):
         )
     save(
         licenses=licenses,
-        base_uri='https://wking.github.io/fsf-api/',
+        base_uri=api_base_uri,
         output_dir=output_dir,
     )
+
+
+def generate_arg_parser():
+    """Create the CLI argument parser object for the script."""
+    parser_main = argparse.ArgumentParser(
+        description='Generate the FSF license API JSON data.',
+        argument_default=argparse.SUPPRESS,
+    )
+    parser_main.add_argument(
+        'output_dir',
+        nargs='?',
+        help='The directory to output the API data to, the CWD by default',
+    )
+    parser_main.add_argument(
+        '--source-uri',
+        help='A custom source URI to load the FSF license list page from',
+    )
+    parser_main.add_argument(
+        '--api-base-uri',
+        help='A custom base URL for the output API',
+    )
+    return parser_main
+
+
+def main(sys_argv=None):
+    """Run the API generation script with the specified CLI options."""
+    arg_parser = generate_arg_parser()
+    cli_args = arg_parser.parse_args(sys_argv)
+    generate_api(**vars(cli_args))
 
 
 if __name__ == '__main__':
