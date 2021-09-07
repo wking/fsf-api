@@ -150,7 +150,7 @@ IDENTIFIERS = {
     'FDLv1.1': {'spdx': ['GFDL-1.1-or-later', 'GFDL-1.1-only', 'GFDL-1.1']},
     'FDLv1.2': {'spdx': ['GFDL-1.2-or-later', 'GFDL-1.2-only', 'GFDL-1.2']},
     'FDLv1.3': {'spdx': ['GFDL-1.3-or-later', 'GFDL-1.3-only', 'GFDL-1.3']},
-    'FreeBSD': {'spdx': ['BSD-2-Clause-FreeBSD']},
+    'FreeBSD': {'spdx': ['BSD-2-Clause-FreeBSD', 'BSD-2-Clause', 'BSD-2-Clause-NetBSD']},
     'freetype': {'spdx': ['FTL']},
     'GNUAllPermissive': {'spdx': ['FSFAP']},
     'GNUGPLv3': {'spdx': ['GPL-3.0-or-later', 'GPL-3.0-only', 'GPL-3.0', 'GPL-3.0+']},
